@@ -27,11 +27,17 @@ Before creating any applications, you **must** start the `infra` to make the `mi
 cd infra
 docker compose up -d
 ```
-*(You only need to run this once on your machine. Never stop this infra if other applications are still running).*
+*(By default, this only starts MariaDB and phpMyAdmin. You only need to run this once on your machine. Never stop this infra if other applications are still running).*
+
+**Optional Services (Profiles):**
+You can enable additional infrastructure services using Docker Compose profiles:
+- With MQTT Broker: `docker compose --profile mqtt up -d`
+- With PostgreSQL: `docker compose --profile postgres up -d`
+- With Redis: `docker compose --profile redis up -d`
 
 **Accessing Infra:**
 - phpMyAdmin: `http://localhost:7001`
-- MQTT Explorer: `http://localhost:7002`
+- MQTT Explorer (if `mqtt` profile is active): `http://localhost:7002`
 
 ### Step 2: Forging a New Project
 Do not modify the contents of the `8000-boilerplate` folder directly. Use the automation script to generate new projects.
@@ -101,11 +107,17 @@ Sebelum membuat aplikasi apa pun, kamu **wajib** menyalakan `infra` terlebih dah
 cd infra
 docker compose up -d
 ```
-*(Cukup jalankan ini sekali saja di PC kamu. Jangan pernah mematikan infra ini jika masih ada aplikasi lain yang berjalan).*
+*(Secara default, ini hanya akan menyalakan MariaDB dan phpMyAdmin. Cukup jalankan ini sekali saja di PC kamu. Jangan pernah mematikan infra ini jika masih ada aplikasi lain yang berjalan).*
+
+**Layanan Opsional (Profiles):**
+Kamu bisa mengaktifkan infrastruktur tambahan menggunakan Docker Compose profiles:
+- Berserta Broker MQTT: `docker compose --profile mqtt up -d`
+- Berserta PostgreSQL: `docker compose --profile postgres up -d`
+- Berserta Redis: `docker compose --profile redis up -d`
 
 **Akses Infra:**
 - phpMyAdmin: `http://localhost:7001`
-- MQTT Explorer: `http://localhost:7002`
+- MQTT Explorer (jika profil `mqtt` aktif): `http://localhost:7002`
 
 ### Langkah 2: Mencetak Proyek Baru
 Jangan menyentuh isi folder `8000-boilerplate` secara langsung. Gunakan *script* otomatis untuk meng-*generate* proyek baru.

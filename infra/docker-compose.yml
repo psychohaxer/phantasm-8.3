@@ -28,6 +28,8 @@ services:
     image: eclipse-mosquitto:latest
     container_name: infra-mqtt
     restart: always
+    profiles:
+      - mqtt
     ports:
       - "6002:1883"
       - "6003:9001"
@@ -42,12 +44,42 @@ services:
     image: smeagolworms4/mqtt-explorer
     container_name: infra-mqtt-web
     restart: always
+    profiles:
+      - mqtt
     ports:
       - "7002:4000"
     environment:
       - HTTP_PORT=4000
     depends_on:
       - mosquitto
+    networks:
+      - mirage-net
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: infra-postgres
+    restart: always
+    profiles:
+      - postgres
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - "6004:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mirage-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: infra-redis
+    restart: always
+    profiles:
+      - redis
+    ports:
+      - "6005:6379"
+    volumes:
+      - redis_data:/data
     networks:
       - mirage-net
 
@@ -58,3 +90,5 @@ networks:
 
 volumes:
   mysql_data:
+  postgres_data:
+  redis_data:
