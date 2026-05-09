@@ -1,5 +1,81 @@
 # Phantasm-8.3 (Microservice Kit)
 
+[🇮🇩 Versi Indonesia di bawah](#versi-indonesia)
+
+Phantasm is a Docker-based *Microservice Local Development Kit*. Unlike traditional monolithic stacks, Phantasm strictly separates the **Core Infrastructure** (Database, MQTT Broker) from the **Applications/Microservices** (Nginx, PHP-FPM).
+
+This decentralized approach is designed specifically to solve:
+1. **Extreme RAM/Storage Savings**: 10 Laravel projects no longer require 10 instances of MariaDB running simultaneously.
+2. **Zero Port Collisions**: Each application is allocated a clean, distinct host port.
+3. **Production-like Connectivity**: It utilizes a centralized Docker network (`mirage-net`) for inter-service communication, mimicking a real production environment.
+
+## 🏗️ Repository Structure
+
+This repository is a **kit**. When you clone it, you will get:
+- `infra/` — The heart of Phantasm. Contains shared services (MariaDB, phpMyAdmin, Mosquitto MQTT).
+- `8000-boilerplate/` — The base template for every new microservice application (Alpine Linux + Nginx + PHP 8.3 FPM).
+- `create-project.sh` — A magic script to automate the creation of new applications.
+
+---
+
+## 🚀 Usage Guide
+
+### Step 1: Ignite the Core Infrastructure
+Before creating any applications, you **must** start the `infra` to make the `mirage-net` network and database available.
+
+```bash
+cd infra
+docker compose up -d
+```
+*(You only need to run this once on your machine. Never stop this infra if other applications are still running).*
+
+**Accessing Infra:**
+- phpMyAdmin: `http://localhost:7001`
+- MQTT Explorer: `http://localhost:7002`
+
+### Step 2: Forging a New Project
+Do not modify the contents of the `8000-boilerplate` folder directly. Use the automation script to generate new projects.
+
+Command format: `./create-project.sh <AVAILABLE_PORT> <PROJECT_NAME>`
+
+**Example:**
+```bash
+./create-project.sh 8008 online-store
+```
+
+The script will automatically create a `~/projects/8008-online-store` folder on your machine, rename the containers, and set the port to `8008`.
+
+### Step 3: Running Your New Project
+Navigate to the newly created project folder, insert your code, and start it up!
+
+```bash
+# Navigate to your new project
+cd ../projects/8008-online-store
+
+# Place your application source code inside the src/ folder
+git clone <your-app-repo> src/
+
+# Start the containers
+docker compose up -d --build
+```
+
+### Step 4: Database & MQTT Connections
+Inside your Laravel/App `.env` file, ensure you use the `infra` hostnames (not `127.0.0.1` or `localhost`):
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=infra-mariadb
+DB_PORT=3306
+
+MQTT_HOST=infra-mqtt
+MQTT_PORT=1883
+```
+
+---
+
+<a name="versi-indonesia"></a>
+# 🇮🇩 Versi Indonesia
+
 Phantasm adalah ekosistem *Microservice Local Development Kit* berbasis Docker. Tidak seperti tumpukan (*stack*) monolitik tradisional, Phantasm memisahkan antara **Infrastruktur Inti** (Database, Broker MQTT) dengan **Aplikasi/Microservice** (Nginx, PHP-FPM).
 
 Pendekatan desentralisasi ini dirancang khusus untuk memecahkan masalah:
@@ -70,5 +146,4 @@ MQTT_PORT=1883
 ```
 
 ---
-
 *Selamat membangun ekosistem yang terdistribusi dan efisien!*
