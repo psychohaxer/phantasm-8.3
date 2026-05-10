@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantasm 8.3 - User Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="lang-toggle">
+            <button id="btn-en" class="btn-lang active" onclick="setLang('en')">EN</button>
+            <button id="btn-id" class="btn-lang" onclick="setLang('id')">ID</button>
+        </div>
+        <h1 class="lang-en">Phantasm 8.3</h1>
+        <h1 class="lang-id" style="display:none;">Phantasm 8.3</h1>
+        <p class="subtitle lang-en">Infrastructure Management & Rapid Project Deployment</p>
+        <p class="subtitle lang-id" style="display:none;">Manajemen Infrastruktur & Deployment Proyek Cepat</p>
+    </header>
+
+    <main>
+        <section class="section-card">
+            <div class="lang-en">
+                <h2>Quick Start Guide</h2>
+                <p>Welcome to Phantasm 8.3. This toolkit is designed to help you create and manage Docker-based projects with ease.</p>
+                
+                <div class="step">
+                    <p><span class="step-number">01</span> <strong>Initialize a New Project</strong></p>
+                    <p>Use the provided script to clone the boilerplate and set up your project environment.</p>
+                    <pre><code>./create-project.sh &lt;PORT&gt; &lt;PROJECT_NAME&gt;</code></pre>
+                    <p>Example: <code>./create-project.sh 8008 my-cool-app</code></p>
+                </div>
+
+                <div class="step">
+                    <p><span class="step-number">02</span> <strong>Development Workflow</strong></p>
+                    <p>Once created, your project will be available in the <code>projects/</code> directory.</p>
+                    <pre><code>cd projects/8008-my-cool-app
+# Place your source code in src/
+# Start the containers
+docker compose up -d --build</code></pre>
+                </div>
+
+                <div class="step">
+                    <p><span class="step-number">03</span> <strong>Infrastructure Access</strong></p>
+                    <p>All projects are connected to the <code>infra</code> network, allowing them to communicate with shared services like MariaDB or MQTT.</p>
+                </div>
+            </div>
+
+            <div class="lang-id" style="display:none;">
+                <h2>Panduan Cepat</h2>
+                <p>Selamat datang di Phantasm 8.3. Toolkit ini dirancang untuk membantu Anda membuat dan mengelola proyek berbasis Docker dengan mudah.</p>
+                
+                <div class="step">
+                    <p><span class="step-number">01</span> <strong>Inisialisasi Proyek Baru</strong></p>
+                    <p>Gunakan script yang tersedia untuk menduplikasi boilerplate dan mengatur lingkungan proyek Anda.</p>
+                    <pre><code>./create-project.sh &lt;PORT&gt; &lt;NAMA_PROYEK&gt;</code></pre>
+                    <p>Contoh: <code>./create-project.sh 8008 aplikasi-keren</code></p>
+                </div>
+
+                <div class="step">
+                    <p><span class="step-number">02</span> <strong>Alur Kerja Pengembangan</strong></p>
+                    <p>Setelah dibuat, proyek Anda akan tersedia di direktori <code>projects/</code>.</p>
+                    <pre><code>cd projects/8008-aplikasi-keren
+# Letakkan source code di dalam folder src/
+# Jalankan container
+docker compose up -d --build</code></pre>
+                </div>
+
+                <div class="step">
+                    <p><span class="step-number">03</span> <strong>Akses Infrastruktur</strong></p>
+                    <p>Semua proyek terhubung ke jaringan <code>infra</code>, memungkinkan komunikasi dengan layanan bersama seperti MariaDB atau MQTT.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-card">
+            <div class="lang-en">
+                <h2>Project Structure</h2>
+                <p>Phantasm 8.3 follows a modular structure for maximum efficiency:</p>
+                <ul>
+                    <li><strong>infra/</strong>: Core services (MariaDB, MQTT, etc.)</li>
+                    <li><strong>projects/</strong>: Your individual applications</li>
+                    <li><strong>projects/8001-boilerplate</strong>: The base template for new projects</li>
+                </ul>
+            </div>
+            <div class="lang-id" style="display:none;">
+                <h2>Struktur Proyek</h2>
+                <p>Phantasm 8.3 mengikuti struktur modular untuk efisiensi maksimal:</p>
+                <ul>
+                    <li><strong>infra/</strong>: Layanan inti (MariaDB, MQTT, dll.)</li>
+                    <li><strong>projects/</strong>: Aplikasi individual Anda</li>
+                    <li><strong>projects/8001-boilerplate</strong>: Template dasar untuk proyek baru</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

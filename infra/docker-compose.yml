@@ -10,7 +10,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
-      - mirage-net
+      - phantasm-net
 
   phpmyadmin:
     image: phpmyadmin:latest
@@ -22,7 +22,7 @@ services:
     ports:
       - "7001:80"
     networks:
-      - mirage-net
+      - phantasm-net
 
   mosquitto:
     image: eclipse-mosquitto:latest
@@ -38,7 +38,7 @@ services:
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
     networks:
-      - mirage-net
+      - phantasm-net
 
   mqtt-explorer:
     image: smeagolworms4/mqtt-explorer
@@ -53,7 +53,7 @@ services:
     depends_on:
       - mosquitto
     networks:
-      - mirage-net
+      - phantasm-net
 
   postgres:
     image: postgres:15-alpine
@@ -68,7 +68,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - mirage-net
+      - phantasm-net
 
   redis:
     image: redis:7-alpine
@@ -81,11 +81,11 @@ services:
     volumes:
       - redis_data:/data
     networks:
-      - mirage-net
+      - phantasm-net
 
 networks:
-  mirage-net:
-    name: mirage-net
+  phantasm-net:
+    name: phantasm-net
     driver: bridge
 
 volumes:

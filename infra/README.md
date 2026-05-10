@@ -6,7 +6,7 @@ Dengan memusatkan infrastruktur di sini, kita bisa **menghemat resource** (tidak
 
 ## 🔌 Layanan yang Berjalan
 
-Seluruh kontainer di sini tergabung dalam jaringan Docker terpusat bernama `mirage-net`.
+Seluruh kontainer di sini tergabung dalam jaringan Docker terpusat bernama `phantasm-net`.
 
 ### 1. MariaDB (Database Utama)
 - **Container Name**: `infra-mariadb`

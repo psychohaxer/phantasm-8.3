@@ -7,13 +7,13 @@ Phantasm is a Docker-based *Microservice Local Development Kit*. Unlike traditio
 This decentralized approach is designed specifically to solve:
 1. **Extreme RAM/Storage Savings**: 10 Laravel projects no longer require 10 instances of MariaDB running simultaneously.
 2. **Zero Port Collisions**: Each application is allocated a clean, distinct host port.
-3. **Production-like Connectivity**: It utilizes a centralized Docker network (`mirage-net`) for inter-service communication, mimicking a real production environment.
+3. **Production-like Connectivity**: It utilizes a centralized Docker network (`phantasm-net`) for inter-service communication, mimicking a real production environment.
 
 ## 🏗️ Repository Structure
 
 This repository is a **kit**. When you clone it, you will get:
 - `infra/` — The heart of Phantasm. Contains shared services (MariaDB, phpMyAdmin, Mosquitto MQTT).
-- `8000-boilerplate/` — The base template for every new microservice application (Alpine Linux + Nginx + PHP 8.3 FPM).
+- `template/` — The base template for every new microservice application (Alpine Linux + Nginx + PHP 8.3 FPM).
 - `create-project.sh` — A magic script to automate the creation of new applications.
 
 ---
@@ -21,7 +21,7 @@ This repository is a **kit**. When you clone it, you will get:
 ## 🚀 Usage Guide
 
 ### Step 1: Ignite the Core Infrastructure
-Before creating any applications, you **must** start the `infra` to make the `mirage-net` network and database available.
+Before creating any applications, you **must** start the `infra` to make the `phantasm-net` network and database available.
 
 ```bash
 cd infra
@@ -40,7 +40,7 @@ You can enable additional infrastructure services using Docker Compose profiles:
 - MQTT Explorer (if `mqtt` profile is active): `http://localhost:7002`
 
 ### Step 2: Forging a New Project
-Do not modify the contents of the `8000-boilerplate` folder directly. Use the automation script to generate new projects.
+Do not modify the contents of the `template` folder directly. Use the automation script to generate new projects.
 
 Command format: `./create-project.sh <AVAILABLE_PORT> <PROJECT_NAME>`
 
@@ -49,14 +49,14 @@ Command format: `./create-project.sh <AVAILABLE_PORT> <PROJECT_NAME>`
 ./create-project.sh 8008 online-store
 ```
 
-The script will automatically create a `~/projects/8008-online-store` folder on your machine, rename the containers, and set the port to `8008`.
+The script will automatically create a `./projects/8008-online-store` folder, rename the containers, and set the port to `8008`. It also checks if the port is already in use by another project.
 
 ### Step 3: Running Your New Project
 Navigate to the newly created project folder, insert your code, and start it up!
 
 ```bash
 # Navigate to your new project
-cd ../projects/8008-online-store
+cd projects/8008-online-store
 
 # Place your application source code inside the src/ folder
 git clone <your-app-repo> src/
@@ -87,13 +87,13 @@ Phantasm adalah ekosistem *Microservice Local Development Kit* berbasis Docker. 
 Pendekatan desentralisasi ini dirancang khusus untuk memecahkan masalah:
 1. **Penghematan RAM/Storage Ekstrem**: 10 proyek Laravel tidak lagi membutuhkan 10 MariaDB yang berjalan bersamaan.
 2. **Bebas Tabrakan Port**: Setiap aplikasi akan mendapat alokasi port *host* yang rapi.
-3. **Konektivitas Mirip Production**: Menggunakan *Docker network* (`mirage-net`) untuk komunikasi antar layanan yang semirip mungkin dengan *environment* asli.
+3. **Konektivitas Mirip Production**: Menggunakan *Docker network* (`phantasm-net`) untuk komunikasi antar layanan yang semirip mungkin dengan *environment* asli.
 
 ## 🏗️ Struktur Repositori
 
 Repositori ini adalah sebuah **kit** (peralatan). Saat kamu meng-*clone* repositori ini, kamu akan mendapatkan:
 - `infra/` — Jantung dari Phantasm. Berisi layanan *shared* (MariaDB, phpMyAdmin, Mosquitto MQTT).
-- `8000-boilerplate/` — Template/Cetakan dasar untuk setiap aplikasi *microservice* yang akan kamu buat (Alpine Linux + Nginx + PHP 8.3 FPM).
+- `template/` — Template/Cetakan dasar untuk setiap aplikasi *microservice* yang akan kamu buat (Alpine Linux + Nginx + PHP 8.3 FPM).
 - `create-project.sh` — Skrip ajaib untuk mengotomatisasi pembuatan aplikasi baru.
 
 ---
@@ -101,7 +101,7 @@ Repositori ini adalah sebuah **kit** (peralatan). Saat kamu meng-*clone* reposit
 ## 🚀 Panduan Penggunaan
 
 ### Langkah 1: Nyalakan Jantung Infrastruktur
-Sebelum membuat aplikasi apa pun, kamu **wajib** menyalakan `infra` terlebih dahulu agar jaringan `mirage-net` dan *database* tersedia.
+Sebelum membuat aplikasi apa pun, kamu **wajib** menyalakan `infra` terlebih dahulu agar jaringan `phantasm-net` dan *database* tersedia.
 
 ```bash
 cd infra
@@ -120,7 +120,7 @@ Kamu bisa mengaktifkan infrastruktur tambahan menggunakan Docker Compose profile
 - MQTT Explorer (jika profil `mqtt` aktif): `http://localhost:7002`
 
 ### Langkah 2: Mencetak Proyek Baru
-Jangan menyentuh isi folder `8000-boilerplate` secara langsung. Gunakan *script* otomatis untuk meng-*generate* proyek baru.
+Jangan menyentuh isi folder `template` secara langsung. Gunakan *script* otomatis untuk meng-*generate* proyek baru.
 
 Format perintah: `./create-project.sh <PORT_BEBAS> <NAMA_PROYEK>`
 
@@ -129,14 +129,14 @@ Format perintah: `./create-project.sh <PORT_BEBAS> <NAMA_PROYEK>`
 ./create-project.sh 8008 toko-online
 ```
 
-*Script* di atas akan otomatis membuat folder `~/projects/8008-toko-online` di PC kamu, me-rename nama *container*, dan mengatur *port* menjadi `8008`.
+*Script* di atas akan otomatis membuat folder `./projects/8008-toko-online`, me-rename nama *container*, dan mengatur *port* menjadi `8008`. Script ini juga akan memastikan port tersebut belum digunakan oleh proyek lain.
 
 ### Langkah 3: Menjalankan Proyek Barumu
 Pindah ke folder proyek yang baru saja dibuat oleh *script*, masukkan kodemu, dan nyalakan!
 
 ```bash
 # Pindah ke proyek barumu
-cd ../projects/8008-toko-online
+cd projects/8008-toko-online
 
 # Letakkan source code aplikasimu di dalam folder src/
 git clone <repo-aplikasimu> src/

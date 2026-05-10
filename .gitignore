@@ -1,0 +1,3 @@
+# Ignore semua isi projects/ kecuali .gitkeep
+projects/*
+!projects/.gitkeep
